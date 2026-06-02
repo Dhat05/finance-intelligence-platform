@@ -3,6 +3,7 @@ import sqlite3
 conn = sqlite3.connect("finance.db")
 cursor = conn.cursor()
 
+# Users Table
 cursor.execute("""
 CREATE TABLE IF NOT EXISTS users (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -11,16 +12,37 @@ CREATE TABLE IF NOT EXISTS users (
 )
 """)
 
-username = input("Enter username: ")
-email = input("Enter email: ")
-
-cursor.execute(
-    "INSERT INTO users (username, email) VALUES (?, ?)",
-    (username, email)
+# Income Table
+cursor.execute("""
+CREATE TABLE IF NOT EXISTS income (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    user_id INTEGER,
+    amount REAL
 )
+""")
+
+# Expenses Table
+cursor.execute("""
+CREATE TABLE IF NOT EXISTS expenses (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    user_id INTEGER,
+    amount REAL,
+    category TEXT
+)
+""")
+
+# Investments Table
+cursor.execute("""
+CREATE TABLE IF NOT EXISTS investments (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    user_id INTEGER,
+    investment_type TEXT,
+    amount REAL
+)
+""")
 
 conn.commit()
 
-print("User added successfully!")
+print("Database created successfully!")
 
 conn.close()
