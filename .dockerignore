@@ -1,0 +1,7 @@
+venv/
+.git/
+__pycache__/
+finance.db
+screenshots/
+data/
+*.pyc
